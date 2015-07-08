@@ -1,4 +1,4 @@
-libpam-luks-ldap (0.0.1) unstable; urgency=low
+libpam-luks-ldap (0.0.1) trusty; urgency=low
 
   * Initial Release.
 
