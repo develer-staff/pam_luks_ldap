@@ -1,0 +1,8 @@
+.vagrant
+debian/files
+debian/libpam-luks-ldap.debhelper.log
+debian/libpam-luks-ldap.substvars
+debian/libpam-luks-ldap/
+pam_luks_ldap.8
+pam_luks_ldap.8.gz
+sdb.vdi

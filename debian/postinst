@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -e
+
+pam-auth-update --package libpam-luks-ldap

@@ -1,0 +1,70 @@
+---
+- hosts: all
+  sudo: yes
+  gather_facts: no
+  tasks:
+    #
+    # Dependencies
+    #
+
+    - apt: update_cache=yes cache_valid_time=7200
+    - apt: pkg={{ item }} state=present
+      with_items:
+          - cryptsetup
+          - libnss-ldapd
+          - libpam-ldapd
+          - libpam-mount
+          - libpam-python
+          - lvm2
+          - python-ldap
+          - rsync
+          - ubuntu-dev-tools
+
+    #
+    # Encrypted Home
+    #
+
+    - stat: path=/dev/sdb1
+      register: vg
+    - raw: echo -en 'n\np\n1\n\n\nt\n8e\nw\n' | fdisk /dev/sdb
+      when: not vg.stat.exists
+    - shell: "{{ item }}"
+      with_items:
+          - pvcreate /dev/sdb1
+          - vgcreate -v vg_sys /dev/sdb1
+          - lvcreate -l100%FREE -n vagrant vg_sys
+          - echo -n "vagrant" | cryptsetup -v luksFormat --cipher aes-xts-plain64 /dev/vg_sys/vagrant -
+          - echo -n "vagrant" | cryptsetup luksOpen --allow-discards /dev/vg_sys/vagrant cryptedhome -
+          - mkfs.ext4 /dev/mapper/cryptedhome
+          - mount /dev/mapper/cryptedhome /mnt
+          - chown vagrant:vagrant /mnt
+          - rsync -SPHAXphax /home/vagrant/ /mnt
+          - umount /mnt
+          - cryptsetup luksClose cryptedhome
+      when: not vg.stat.exists
+    - copy: src=etc_security_pam_mount.conf.xml dest=/etc/security/pam_mount.conf.xml owner=root group=root mode=0644
+
+    #
+    # LDAP
+    #
+
+    - copy: src=etc_nslcd.conf dest=/etc/nslcd.conf owner=root group=root mode=0644
+      notify: restart nslcd
+
+    - copy: src=etc_nsswitch.conf dest=/etc/nsswitch.conf owner=root group=root mode=0644
+      notify: restart nscd
+     
+    - replace: dest={{ item }} regexp="minimum_uid=1000" replace="minimum_uid=500"
+      with_items:
+          - /etc/pam.d/common-account
+          - /etc/pam.d/common-auth
+          - /etc/pam.d/common-password
+          - /etc/pam.d/common-session
+          - /etc/pam.d/common-session-noninteractive
+
+  handlers:
+    - name: restart nscd
+      service: name=nscd state=restarted
+
+    - name: restart nslcd
+      service: name=nslcd state=restarted

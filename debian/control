@@ -1,0 +1,22 @@
+Source: libpam-luks-ldap
+Section: admin
+Priority: optional
+Maintainer: Lorenzo Villani <lvillani@develer.com>
+Build-Depends: debhelper (>= 8.0.0), pandoc
+Standards-Version: 3.9.4
+Homepage: https://github.com/develersrl/pam_luks_ldap.git
+Vcs-Git: git://github.com/develersrl/pam_luks_ldap.git
+Vcs-Browser: https://github.com/develersrl/pam_luks_ldap.git
+
+Package: libpam-luks-ldap
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python2.7, libpam-mount, libpam-python, python-ldap
+Description: PAM module that obtains a LUKS decryption key from LDAP
+ pam_luks_ldap is a PAM module that fetches a LUKS decryption key from
+ an LDAP directory server and forwards it to *pam_mount(8)*, that will
+ then proceed to mount the user's home directory.
+ .
+ The typical use case is to decouple the LUKS encryption key from the
+ user's password so that their home directory is still transparently
+ mounted at login time but they are free to change their password without
+ the need to sync the change with the local LUKS setup.

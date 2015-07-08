@@ -1,0 +1,6 @@
+Name: Get LUKS decryption key from LDAP
+Default: yes
+Priority: 129
+Auth-Type: Additional
+Auth:
+        optional        pam_python.so        pam_luks_ldap.py
