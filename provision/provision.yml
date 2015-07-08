@@ -11,11 +11,13 @@
     - apt: pkg={{ item }} state=present
       with_items:
           - cryptsetup
+          - debhelper
           - libnss-ldapd
           - libpam-ldapd
           - libpam-mount
           - libpam-python
           - lvm2
+          - pandoc
           - python-ldap
           - rsync
           - ubuntu-dev-tools
