@@ -1,5 +1,5 @@
-libpam-luks-ldap (0.0.1) trusty; urgency=low
+libpam-luks-ldap (0.0.2) trusty; urgency=low
 
-  * Initial Release.
+  * Ubuntu Package.
 
  -- Lorenzo Villani <lvillani@develer.com>  Wed, 08 Jul 2015 09:52:25 +0000

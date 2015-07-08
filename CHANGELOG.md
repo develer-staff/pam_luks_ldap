@@ -3,6 +3,6 @@
 All notable changes to this project are documented in this file.
 
 
-## 0.0.1 - Work in Progress
+## 0.0.2 - 2015-07-08
 
 * First public release.
