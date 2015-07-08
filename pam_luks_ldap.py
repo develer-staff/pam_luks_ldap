@@ -61,6 +61,10 @@ def pam_sm_authenticate(pamh, flags, args):
     return pamh.PAM_SUCCESS
 
 
+def pam_sm_setcred(pamh, flags, args):
+    return pamh.PAM_IGNORE
+
+
 def pam_sm_end(pamh):
     syslog.closelog()
 
