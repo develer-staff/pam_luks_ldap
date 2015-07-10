@@ -42,7 +42,7 @@ Congratulations, you don't have to do anything. We plug into Ubuntu's `pam-auth-
 infrastructure and the package will usually do the right thing when it's installed or removed.
 
 
-### Building from sources
+### On other Debian-based distributions
 
 On Debian-based system you might have to add this line to `/etc/pam.d/common-auth`, right before
 pam_mount's configuration entry:
