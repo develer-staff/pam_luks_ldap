@@ -23,7 +23,7 @@ uninstall:
 
 
 pam_luks_ldap.8.gz: pam_luks_ldap.8
-		gzip -f -9 $<
+	gzip -f -9 $<
 
 
 pam_luks_ldap.8: pam_luks_ldap.8.md
