@@ -3,7 +3,7 @@
 _PAM module that obtains a LUKS decryption key from LDAP_
 
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](http://choosealicense.com/licenses/gpl-3.0/)
-[![PPA](http://img.shields.io/badge/PPA-available-brightgreen.svg)](https://launchpad.net/~lvillani/+archive/ubuntu/pam-luks-ldap)
+[![PPA](http://img.shields.io/badge/PPA-available-brightgreen.svg)](https://launchpad.net/~develer/+archive/ubuntu/pam-luks-ldap)
 
 ---
 
@@ -17,9 +17,9 @@ password without the need to sync the change with the local LUKS setup.
 
 ## Installation
 
-Ubuntu 14.04 users can install the package available from the PPA:
+Ubuntu 16.04 users can install the package available from the PPA:
 
-    sudo add-apt-repository ppa:lvillani/pam-luks-ldap
+    sudo add-apt-repository ppa:develer/pam-luks-ldap
     sudo apt-get update
     sudo apt-get install libpam-luks-ldap
 
